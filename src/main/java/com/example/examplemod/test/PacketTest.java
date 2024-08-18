@@ -23,21 +23,24 @@ public class PacketTest {
     @GameTest(template = ExampleMod.MODID + ":test/empty3x3x3")
     public static void send_to_player(GameTestHelper helper) {
         ServerPlayer player = helper.makeMockServerPlayer();
-        PacketHandler.sendToPlayer(new TestPacket("testing123"), player);
-        helper.succeed();
+        helper.succeedIf(() -> {
+            PacketHandler.sendToPlayer(new TestPacket("testing123"), player);
+        });
     }
     
     @GameTest(template = ExampleMod.MODID + ":test/empty3x3x3")
     public static void send_to_nearby(GameTestHelper helper) {
         helper.makeMockPlayer(GameType.SURVIVAL);
-        PacketHandler.sendToAllAround(new TestPacket("testing123"), Level.OVERWORLD, BlockPos.ZERO, 5D);
-        helper.succeed();
+        helper.succeedIf(() -> {
+            PacketHandler.sendToAllAround(new TestPacket("testing123"), Level.OVERWORLD, BlockPos.ZERO, 5D);
+        });
     }
     
     @GameTest(template = ExampleMod.MODID + ":test/empty3x3x3")
     public static void send_to_all(GameTestHelper helper) {
         helper.makeMockPlayer(GameType.SURVIVAL);
-        PacketHandler.sendToAll(new TestPacket("testing123"));
-        helper.succeed();
+        helper.succeedIf(() -> {
+            PacketHandler.sendToAll(new TestPacket("testing123"));
+        });
     }
 }
