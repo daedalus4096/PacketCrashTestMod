@@ -26,6 +26,6 @@ public class ExampleMod
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        // Some common setup code
+        PacketHandler.registerMessages();
     }
 }
